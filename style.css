@@ -1,0 +1,12 @@
+.play-wrap {
+  position: relative;
+}
+.play-wrap .player {
+  display: none;
+  position: absolute;
+}
+
+.play-wrap .player.active {
+  display: block;
+  position: absolute;
+}
