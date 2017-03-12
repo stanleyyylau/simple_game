@@ -5,26 +5,50 @@ var model = {
 }
 
 var view = {
-  generateViewByPlayer: function(){
+  generateViewByPlayer: function() {
     var tpl = "<div class='player'>%name</div>";
     var result = "";
-    model.players.forEach(function(value){
+    model.players.forEach(function(value) {
       result += tpl.replace('%name', value)
     })
     return result;
   },
-  injectPlayerContentToDom: function(){
+  injectPlayerContentToDom: function() {
     var wrapper = $('.play-wrap');
-   wrapper.html('');
-   $('.play-wrap').html(view.generateViewByPlayer())
+    wrapper.html('');
+    $('.play-wrap').html(view.generateViewByPlayer())
   },
-  displayWinner: function(){
+  displayWinner: function() {
     $('.play-wrap .player').eq(model.current_winner).addClass('active')
+  },
+  reveilWinner: function() {
+    var timeToTake = 5;
+    var totalLength = model.players.length - 1;
+    var firstPlayTime = new Date();
+    var i = 0;
+    var q = 0;
+    var doWork = setInterval(function(){
+      if((new Date() - firstPlayTime) > timeToTake * 1000){
+        clearInterval(doWork)
+        setTimeout(view.displayWinner, 0)
+      }
+      if (i > totalLength) {
+        i = 0;
+      }
+      (function(j) {
+        $('.play-wrap .player').eq(j).addClass('active')
+        setTimeout(function() {
+          $('.play-wrap .player').eq(j).removeClass('active')
+        }, 0)
+      })(i)
+      i++;
+    }, 100)
+    // view.displayWinner()
   }
 }
 
 var controller = {
-  playGame: function(){
+  playGame: function() {
     view.injectPlayerContentToDom()
     var totalLength = model.players.length;
     var ramdomNum;
@@ -33,6 +57,7 @@ var controller = {
     } while (model.won_players.indexOf(ramdomNum) != -1)
     model.current_winner = ramdomNum;
     model.won_players.push(model.current_winner)
-    view.displayWinner()
+    // debugger
+    view.reveilWinner()
   }
 }
