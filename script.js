@@ -1,7 +1,8 @@
 var model = {
-  players: ["Stanley", "Yvonne", "Stan", "Von", "Stanvon"],
+  players: ["Stanley", "Tommy", "Tom", "Tomm", "Stan"],
   won_players: [],
-  current_winner: null
+  current_winner: null,
+  isStop: false
 }
 
 var view = {
@@ -24,13 +25,11 @@ var view = {
   reveilWinner: function() {
     var timeToTake = 5;
     var totalLength = model.players.length - 1;
-    var firstPlayTime = new Date();
     var i = 0;
     var q = 0;
     var doWork = setInterval(function(){
-      if((new Date() - firstPlayTime) > timeToTake * 1000){
-        clearInterval(doWork)
-        setTimeout(view.displayWinner, 0)
+      if(model.isStop){
+        return setTimeout(view.displayWinner, 0)
       }
       if (i > totalLength) {
         i = 0;
@@ -49,6 +48,7 @@ var view = {
 
 var controller = {
   playGame: function() {
+    model.isStop = false
     view.injectPlayerContentToDom()
     var totalLength = model.players.length;
     var ramdomNum;
@@ -58,6 +58,10 @@ var controller = {
     model.current_winner = ramdomNum;
     model.won_players.push(model.current_winner)
     // debugger
+    console.log(model)
     view.reveilWinner()
+  },
+  stop: function(){
+    model.isStop = true;
   }
 }
