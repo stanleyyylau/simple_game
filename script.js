@@ -1,8 +1,11 @@
+var doWork;
+var i;
+
 var model = {
   players: ["Stanley", "Tommy", "Tom", "Tomm", "Stan"],
   won_players: [],
-  current_winner: null,
-  isStop: false
+  isStop: false,
+  currentWinner: null
 }
 
 var view = {
@@ -19,17 +22,30 @@ var view = {
     wrapper.html('');
     $('.play-wrap').html(view.generateViewByPlayer())
   },
-  displayWinner: function() {
-    $('.play-wrap .player').eq(model.current_winner).addClass('active')
+  displayWinner: function(winnerIndex) {
+    $('.play-wrap .player').eq(winnerIndex).addClass('active')
   },
   reveilWinner: function() {
     var timeToTake = 5;
     var totalLength = model.players.length - 1;
-    var i = 0;
+    i = 0;
     var q = 0;
-    var doWork = setInterval(function(){
+    if (totalLength < 1) return console.log('Players must be more than two')
+    doWork = setInterval(function(){
       if(model.isStop){
-        return setTimeout(view.displayWinner, 0)
+        if (i == 0) {
+          i = totalLength
+        }else{
+          i = i - 1;
+        }
+        console.log(i)
+        // delete winner from model
+        model.won_players.push(model.players[i])
+        model.players.splice(i, 1)
+        clearInterval(doWork)
+        return setTimeout(function(){
+          view.displayWinner(i)
+        }, 0)
       }
       if (i > totalLength) {
         i = 0;
@@ -50,18 +66,12 @@ var controller = {
   playGame: function() {
     model.isStop = false
     view.injectPlayerContentToDom()
-    var totalLength = model.players.length;
-    var ramdomNum;
-    do {
-      ramdomNum = Math.floor(Math.random() * totalLength)
-    } while (model.won_players.indexOf(ramdomNum) != -1)
-    model.current_winner = ramdomNum;
-    model.won_players.push(model.current_winner)
     // debugger
     console.log(model)
     view.reveilWinner()
   },
   stop: function(){
     model.isStop = true;
+    model.currentWinner = i;
   }
 }
