@@ -4,9 +4,57 @@
 .play-wrap .player {
   display: none;
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .play-wrap .player.active {
   display: block;
   position: absolute;
+}
+
+.play-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 80px;
+    position: relative;
+    height: 300px;
+    border: 1px dotted #E91E63;
+}
+
+.control-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.container.app {
+    height: 100%;
+    display: flex;
+    justify-content: inherit;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+}
+
+body {
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+.control-wrap {
+    display: flex;
+    justify-content: space-around;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
 }

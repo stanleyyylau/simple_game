@@ -75,3 +75,15 @@ var controller = {
     model.currentWinner = i;
   }
 }
+
+
+$(document).ready(function(){
+  $('.playGame').on('click', function(){
+    controller.playGame()
+  })
+
+  $('.stopGame').on('click', function(){
+    controller.stop()
+  })
+
+})
