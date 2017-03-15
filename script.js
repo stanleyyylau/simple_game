@@ -1,6 +1,10 @@
 var doWork;
 var i;
 
+var audio = new Audio('sounds/clap.wav');
+var gameAudio = new Audio('sounds/game.mp3');
+    gameAudio.loop = true;
+
 var model = {
   players: ["Stanley", "Tommy", "Tom", "Tomm", "Stan"],
   won_players: [],
@@ -24,10 +28,12 @@ var view = {
   },
   displayWinner: function(winnerIndex) {
     $('.play-wrap .player').eq(winnerIndex).addClass('active')
-    console.log('the winnder index is ', winnerIndex)
-    console.log('and the winner name is ', model.players[winnerIndex])
-    console.log('im printing out the won players just for your reference', model.won_players)
-    view.renderWinnerList()
+    
+    setTimeout(function(){
+      view.renderWinnerList()
+      $('.play-wrap .player').eq(winnerIndex).addClass('currentWinner')
+      audio.play();
+    },10)
   },
   renderWinnerList: function() {
     // First update the number of won players
@@ -80,8 +86,11 @@ var view = {
 
     setTimeout(function(){
       $('.mask').hide()
+      $('.entry').css('display', 'none')
       $('.logo').hide()
       $('.dataEntry').hide()
+      $('.app').show()
+      $('.logo-wrapper').show()
       $('.play-wrap').show()
       $('.winner-list').show()
       $('.play-wrap').css('display', 'flex')
@@ -94,6 +103,7 @@ var view = {
               // First we need to decide if we want to play or stop the game
             if(model.isStop){
               model.isStop = false
+              gameAudio.play()
               $('.playGame').text('Stop')
               view.injectPlayerContentToDom()
               // debugger
@@ -101,12 +111,13 @@ var view = {
               view.reveilWinner()
             }else{
               // To Trigger STOP button
+              gameAudio.pause()
               controller.stop()
             }
           
           }
       });
-    }, 4000)
+    }, 1000)
   }
 }
 
@@ -115,6 +126,7 @@ var controller = {
     // First we need to decide if we want to play or stop the game
     if(model.isStop){
       model.isStop = false
+      $('.play-wrap .player').removeClass('currentWinner')
       $('.playGame').text('Stop')
       view.injectPlayerContentToDom()
       // debugger

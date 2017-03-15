@@ -6,6 +6,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  transition: font-size 1s ease;
 }
 
 .play-wrap .player.active {
@@ -21,7 +22,6 @@
     font-size: 80px;
     position: relative;
     height: 300px;
-    border: 1px dotted #E91E63;
     display: none;
 }
 
@@ -78,6 +78,7 @@ textarea#playerinput {
     color: white;
     box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
     width: 230px;
+    overflow: scroll;
 }
 
 .mask {
@@ -106,3 +107,54 @@ textarea#playerinput {
     border-radius: 10%;
     padding: 2px 25px;
 }
+
+.logo-wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 250px;
+}
+
+.logo-wrapper .mml {
+    width: 100px;
+}
+
+.logo-wrapper .imi {
+    width: 100px;
+}
+
+.container.app {
+    height: 100%;
+    display: flex;
+    justify-content: inherit;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+    padding-left: 230px;
+    width: 100%;
+}
+
+.app {
+  display: none;
+}
+
+.dataEntry form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.entry {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-wrapper .mml {
+    width: 300px;
+}
+
+.player.active.currentWinner {
+    font-size: 150px;
+}
+
