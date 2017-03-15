@@ -22,6 +22,7 @@
     position: relative;
     height: 300px;
     border: 1px dotted #E91E63;
+    display: none;
 }
 
 .control-wrap {
@@ -29,6 +30,7 @@
     justify-content: space-between;
     width: 200px;
     margin: 0 auto;
+    display: none;
 }
 
 .container.app {
@@ -53,8 +55,46 @@ html {
     justify-content: space-around;
     max-width: 500px;
     margin: 0 auto;
+    display: none;
+    margin-top: -300px;
 }
 
 button {
   cursor: pointer;
+}
+
+textarea#playerinput {
+    width: 800px;
+}
+
+.winner-list {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #009688;
+    padding: 15px;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
+    width: 230px;
+}
+
+.mask {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.82);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    right: 0;
+    margin: 0 auto;
 }

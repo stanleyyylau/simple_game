@@ -3,18 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>game</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="animate.css">
     <link rel="stylesheet" href="style.css">
     <script src="jquery-1.10.1.min.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
     <div class="container app">
-      <div class="col-md-12 play-wrap">play game</div>
+      <div class="col-md-12 play-wrap">Play Game</div>
+
+      <div class="col-md-12 dataEntry">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter Players Here</label>
+            <textarea rows="30" cols="50" class="form-control" id="playerinput" placeholder="One Name Per Line"></textarea>
+          </div>
+          <button type="submit" class="btn btn-default confirmDataEntry">Confirm</button>
+        </form>
+      </div>
+
       <div class="col-md-12 control-wrap">
         <div class="playButton"><button type="button" class="btn btn-primary playGame">Play</button></div>
         <div class="stopButton"><button type="button" class="btn btn-primary stopGame">Stop</button></div>
-      </div>
+      </div>      
     </div>
+
+    <div class="winner-list">
+      <h3 class="title">Winner (<span class="number">0</span>)</h3>
+    </div>
+
+    <div class="mask">
+      <img class="logo animated infinite" src="https://www.mmldigi.com/wp-content/uploads/2017/02/008.png" alt="mml">
+    </div>
+    
   </body>
 </html>
