@@ -9,7 +9,8 @@ var model = {
   players: ["Stanley", "Tommy", "Tom", "Tomm", "Stan"],
   won_players: [],
   isStop: true,
-  currentWinner: null
+  currentWinner: null,
+  firstRound: true
 }
 
 var view = {
@@ -32,8 +33,9 @@ var view = {
     setTimeout(function(){
       view.renderWinnerList()
       $('.play-wrap .player').eq(winnerIndex).addClass('currentWinner')
+      $('.app').addClass('win')
       audio.play();
-    },10)
+    },100)
   },
   renderWinnerList: function() {
     // First update the number of won players
@@ -44,7 +46,7 @@ var view = {
     $('.winner-list').append(tpl)
   },
   reveilWinner: function() {
-    var timeToTake = 5;
+    
     var totalLength = model.players.length - 1;
     i = 0;
     var q = 0;
@@ -101,23 +103,44 @@ var view = {
       $(document).keypress(function(e) {
           if(e.which == 13) {
               // First we need to decide if we want to play or stop the game
-            if(model.isStop){
+            
+            if(model.firstRound) {
+              model.firstRound = false
+              if(model.isStop){
               model.isStop = false
+              $('.app').removeClass('win')
               gameAudio.play()
-              $('.playGame').text('Stop')
+              $('.playGame').text('stop')
+              $('.player.active').removeClass('currentWinner')
+              
               view.injectPlayerContentToDom()
-              // debugger
-              console.log(model)
               view.reveilWinner()
-            }else{
-              // To Trigger STOP button
-              gameAudio.pause()
-              controller.stop()
+              
+              }else{
+                // To Trigger STOP button
+                gameAudio.pause()
+                controller.stop()
+              }
+            }else {
+              if(model.isStop){
+              model.isStop = false
+              $('.app').removeClass('win')
+              gameAudio.play()
+              $('.playGame').text('stop')
+              $('.player.active').removeClass('currentWinner')
+              setTimeout(function(){
+                view.injectPlayerContentToDom()
+                view.reveilWinner()
+              }, 1000)
+              }else{
+                // To Trigger STOP button
+                gameAudio.pause()
+                controller.stop()
+              }
             }
-          
           }
       });
-    }, 1000)
+    }, 3000)
   }
 }
 
