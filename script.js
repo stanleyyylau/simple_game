@@ -4,7 +4,7 @@ var i;
 var model = {
   players: ["Stanley", "Tommy", "Tom", "Tomm", "Stan"],
   won_players: [],
-  isStop: false,
+  isStop: true,
   currentWinner: null
 }
 
@@ -87,20 +87,48 @@ var view = {
       $('.play-wrap').css('display', 'flex')
       $('.control-wrap').show()
       $('.control-wrap').css('display', 'flex')
+
+      // Listen for enter listen to trigger game play logic
+      $(document).keypress(function(e) {
+          if(e.which == 13) {
+              // First we need to decide if we want to play or stop the game
+            if(model.isStop){
+              model.isStop = false
+              $('.playGame').text('Stop')
+              view.injectPlayerContentToDom()
+              // debugger
+              console.log(model)
+              view.reveilWinner()
+            }else{
+              // To Trigger STOP button
+              controller.stop()
+            }
+          
+          }
+      });
     }, 4000)
   }
 }
 
 var controller = {
   playGame: function() {
-    model.isStop = false
-    view.injectPlayerContentToDom()
-    // debugger
-    console.log(model)
-    view.reveilWinner()
+    // First we need to decide if we want to play or stop the game
+    if(model.isStop){
+      model.isStop = false
+      $('.playGame').text('Stop')
+      view.injectPlayerContentToDom()
+      // debugger
+      console.log(model)
+      view.reveilWinner()
+    }else{
+      // To Trigger STOP button
+      controller.stop()
+    }
+    
   },
   stop: function(){
     model.isStop = true;
+    $('.playGame').text('Play')
     model.currentWinner = i;
   }
 }
@@ -123,3 +151,5 @@ $(document).ready(function(){
   })
 
 })
+
+

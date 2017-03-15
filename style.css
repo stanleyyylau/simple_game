@@ -98,3 +98,11 @@ textarea#playerinput {
     right: 0;
     margin: 0 auto;
 }
+
+.playGame {
+    font-size: 50px;
+    background-color: #E91E63;
+    border: 0;
+    border-radius: 10%;
+    padding: 2px 25px;
+}
